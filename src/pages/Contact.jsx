@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { salonInfo } from '../data/salonInfo';
+import PageHero from '../components/PageHero';
 import HoursStatusBadge from '../components/HoursStatusBadge';
 import { 
   MapPin, 
@@ -25,6 +27,10 @@ export default function Contact({ onOpenBooking }) {
   });
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    document.title = "Location, Hours & Direct Contact | Catrines Mens Salon Durham";
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -43,20 +49,20 @@ export default function Contact({ onOpenBooking }) {
   const currentDayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date().getDay()];
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Get in Touch</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-4">
-          Location, Hours &amp; Direct Contact
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Stop into our East Durham shop on Angier Ave, give us a call, or reserve your spot ahead of time with zero wait.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Section 7 • Find Us in Durham"
+        title="Location, Hours &amp; Direct Contact"
+        breadcrumbLabel="Contact &amp; Location"
+        description="Conveniently located in East Durham at 2110 Angier Ave. Stop in or call us directly for inquiries, wait times, or directions."
+        stats={[
+          { label: "Street Address", value: "2110 Angier Ave" },
+          { label: "City & Zip", value: "Durham, NC 27703" },
+          { label: "Direct Phone", value: "(919) 672-6717" },
+          { label: "Parking", value: "Free Street & On-Site" }
+        ]}
+      />
 
       {/* Main Info & Form Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,14 +122,14 @@ export default function Contact({ onOpenBooking }) {
                     <Calendar className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium">Online Booking</h4>
+                    <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium">Online Reservations</h4>
                     <div className="flex items-center gap-3 mt-1">
-                      <button
-                        onClick={onOpenBooking}
+                      <Link
+                        to="/book"
                         className="text-xs text-gold-400 font-bold hover:underline"
                       >
                         Book on Website
-                      </button>
+                      </Link>
                       <span className="text-slate-600">•</span>
                       <a
                         href={salonInfo.bookingUrl}
@@ -282,7 +288,7 @@ export default function Contact({ onOpenBooking }) {
 
                   <div className="pt-2 flex items-center justify-between">
                     <p className="text-[11px] text-slate-500">
-                      Need immediate booking? <button type="button" onClick={onOpenBooking} className="text-gold-400 font-semibold underline">Book online now</button>
+                      Need immediate booking? <Link to="/book" className="text-gold-400 font-semibold underline">Book online now</Link>
                     </p>
 
                     <button

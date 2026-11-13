@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { salonInfo } from '../data/salonInfo';
 import { barbersData } from '../data/barbersData';
+import PageHero from '../components/PageHero';
 import HoursStatusBadge from '../components/HoursStatusBadge';
 import { 
   Scissors, 
@@ -12,10 +14,15 @@ import {
   MapPin, 
   Calendar,
   CheckCircle2,
-  HeartHandshake
+  HeartHandshake,
+  ArrowRight
 } from 'lucide-react';
 
 export default function About({ onOpenBooking }) {
+  useEffect(() => {
+    document.title = "About Our Shop & Master Barbers | Catrines Mens Salon";
+  }, []);
+
   const teamMembers = barbersData.filter(b => b.id !== 'any');
 
   const salonPillars = [
@@ -61,22 +68,22 @@ export default function About({ onOpenBooking }) {
   ];
 
   return (
-    <div className="space-y-24 py-8">
-      {/* Page Header */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>The Catrines Tradition</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-6">
-          Crafting Durham's Sharpest Men
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          At Catrines Mens Salon, grooming is not a quick chore—it is an investment in your personal confidence, self-respect, and presence.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Our Heritage & Philosophy"
+        title="About Catrines Mens Salon"
+        breadcrumbLabel="About Us"
+        description="At Catrines Mens Salon, we believe grooming is more than just a regular haircut—it is an investment in your confidence. Located at 2110 Angier Ave, our salon provides a dedicated, professional space for men's grooming in Durham, NC."
+        stats={[
+          { label: "Durham Location", value: "2110 Angier Ave" },
+          { label: "Client Rating", value: "4.9 / 5.0" },
+          { label: "Combined Experience", value: "12+ Years" },
+          { label: "Chair Atmosphere", value: "100% Welcoming" }
+        ]}
+      />
 
-      {/* Origin Story Section */}
+      {/* Origin Story Section from Brief */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 relative">
@@ -90,7 +97,7 @@ export default function About({ onOpenBooking }) {
             </div>
 
             <div className="absolute -bottom-6 -right-6 p-5 rounded-2xl bg-charcoal-900 border border-gold-500/30 shadow-2xl hidden sm:block max-w-xs">
-              <div className="text-xs font-bold text-gold-400 uppercase tracking-wider">Rooted in Durham</div>
+              <div className="text-xs font-bold text-gold-400 uppercase tracking-wider">East Durham Roots</div>
               <div className="text-sm font-semibold text-white mt-1">2110 Angier Ave, Durham, NC</div>
               <div className="text-xs text-slate-400 mt-1">Serving local professionals, students, and families with pride.</div>
             </div>
@@ -98,38 +105,46 @@ export default function About({ onOpenBooking }) {
 
           <div className="lg:col-span-6 space-y-6">
             <span className="text-xs uppercase tracking-widest font-bold text-gold-500">
-              Our Philosophy
+              The Catrines Story
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white leading-tight">
-              A Dedicated Space Built Exclusively for Men's Grooming
+              A Dedicated Space Built Exclusively for Men's Grooming in Durham, NC
             </h2>
 
-            <p className="text-slate-300 leading-relaxed">
-              Located at 2110 Angier Ave in the heart of East Durham, Catrines Mens Salon was founded to bridge the gap between old-school barbershop camaraderie and modern high-end grooming luxury.
+            <p className="text-slate-300 leading-relaxed text-base">
+              At Catrines Mens Salon, we believe grooming is more than just a regular haircut—it is an investment in your confidence. Located at 2110 Angier Ave, our salon provides a dedicated, professional space for men's grooming in Durham, NC.
             </p>
 
             <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
               From traditional fades and classic cuts to precise beard detailing and modern texturizing, our expert barbers and stylists blend sharp attention to detail with standard-setting customer care. We cater to newcomers and regulars alike, focusing on quality, consistency, and an atmosphere where you can kick back and walk out looking your absolute best.
             </p>
 
-            <div className="p-4 rounded-xl bg-charcoal-900/90 border border-charcoal-800 space-y-2">
+            <div className="p-5 rounded-xl bg-charcoal-900 border border-charcoal-800 space-y-2">
               <div className="flex items-center gap-2 text-gold-400 font-semibold text-sm">
                 <Award className="w-4 h-4" />
-                <span>Our Uncompromising Promise</span>
+                <span>Our Master Barber Promise</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
                 "We never rush a chair. We measure lines with surgical precision, test blade sharpness relentlessly, and ensure you feel revitalized from the moment you sit down until the final towel."
               </p>
             </div>
 
-            <div className="pt-2">
-              <button
-                onClick={onOpenBooking}
+            <div className="pt-2 flex flex-wrap gap-4">
+              <Link
+                to="/services"
+                className="px-6 py-3.5 rounded-xl bg-charcoal-900 border border-gold-500/40 text-gold-400 font-bold text-xs uppercase tracking-wider hover:bg-gold-500 hover:text-charcoal-950 transition-all flex items-center gap-2"
+              >
+                <span>View Full Service Menu</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                to="/book"
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
               >
                 <Calendar className="w-4 h-4" />
-                <span>Book With Our Master Barbers</span>
-              </button>
+                <span>Schedule With Our Barbers</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -179,7 +194,7 @@ export default function About({ onOpenBooking }) {
             Meet Our Master Barbers
           </h2>
           <p className="text-slate-300 text-sm">
-            Trained, licensed, and passionate professionals dedicated to their craft.
+            Trained, licensed, and passionate professionals dedicated to their craft right here in Durham.
           </p>
         </div>
 
@@ -227,13 +242,13 @@ export default function About({ onOpenBooking }) {
               </div>
 
               <div className="p-6 pt-0">
-                <button
-                  onClick={onOpenBooking}
+                <Link
+                  to="/book"
                   className="w-full py-2.5 px-4 rounded-xl bg-charcoal-800 hover:bg-gold-500 text-slate-200 hover:text-charcoal-950 font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Book With {barber.name.split(' ')[0]}</span>
-                </button>
+                </Link>
               </div>
             </div>
           ))}

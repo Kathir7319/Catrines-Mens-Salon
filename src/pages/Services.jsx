@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { servicesData, serviceCategories } from '../data/servicesData';
 import ServiceCard from '../components/ServiceCard';
+import PageHero from '../components/PageHero';
 import { 
   Scissors, 
   Sparkles, 
@@ -9,12 +11,17 @@ import {
   CheckCircle2, 
   ShieldCheck, 
   HelpCircle,
-  Clock
+  Clock,
+  Sparkle
 } from 'lucide-react';
 
 export default function Services({ onSelectService, onOpenBooking }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    document.title = "Service Menu & Transparent Pricing | Catrines Mens Salon Durham";
+  }, []);
 
   const filteredServices = servicesData.filter((service) => {
     const matchesCategory = activeCategory === 'all' || service.category === activeCategory;
@@ -24,20 +31,20 @@ export default function Services({ onSelectService, onOpenBooking }) {
   });
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Full Grooming Menu</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-4">
-          Service Menu &amp; Transparent Pricing
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Clear rates, no surprise add-ons. Every haircut, fade, and shave is performed with uncompromising attention to detail right here in Durham, NC.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Section 4 • Transparent Rates"
+        title="Service Menu &amp; Transparent Pricing"
+        breadcrumbLabel="Services &amp; Pricing"
+        description="Precision haircuts, sharp beard trims, skin fades, and royal hot towel shaves tailored for the modern man. Every service includes an in-depth consultation and blow-dry styling finish."
+        stats={[
+          { label: "Pricing Policy", value: "100% Transparent" },
+          { label: "Consultation", value: "Complimentary" },
+          { label: "Razor Blade", value: "Sanitized Single-Use" },
+          { label: "Hot Towel Prep", value: "Eucalyptus Steamed" }
+        ]}
+      />
 
       {/* Controls Bar: Category Filter Pills + Search */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +71,7 @@ export default function Services({ onSelectService, onOpenBooking }) {
             <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <input
               type="text"
-              placeholder="Search services (e.g. fade, beard, hot towel)..."
+              placeholder="Search cuts, fades, beards..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-4 py-2 bg-charcoal-850 border border-charcoal-750 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors"
@@ -147,16 +154,16 @@ export default function Services({ onSelectService, onOpenBooking }) {
 
             <div className="pt-4 border-t border-charcoal-800 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-slate-400">
-                Have questions or need custom group grooming for a wedding? Call us directly: <a href="tel:+19196726717" className="text-gold-400 font-bold">(919) 672-6717</a>
+                Ready to book? Select any service above or jump directly to our <Link to="/book" className="text-gold-400 font-bold underline">Appointment Booking Page</Link>.
               </div>
 
-              <button
-                onClick={onOpenBooking}
+              <Link
+                to="/book"
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider hover:bg-gold-400 transition-colors flex items-center justify-center gap-2 shadow-md"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Reserve An Appointment</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

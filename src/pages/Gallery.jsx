@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { galleryData, galleryCategories } from '../data/galleryData';
 import { salonInfo } from '../data/salonInfo';
+import PageHero from '../components/PageHero';
 import { 
   Sparkles, 
   Eye, 
@@ -16,6 +18,10 @@ import {
 export default function Gallery({ onOpenBooking }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(null);
+
+  useEffect(() => {
+    document.title = "Stylist Portfolio Gallery | Catrines Mens Salon Durham";
+  }, []);
 
   const filteredItems = galleryData.filter((item) => 
     activeCategory === 'all' || item.category === activeCategory
@@ -44,20 +50,20 @@ export default function Gallery({ onOpenBooking }) {
   const currentItem = activeLightboxIndex !== null ? filteredItems[activeLightboxIndex] : null;
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Real Client Results</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-4">
-          Stylist Portfolio Gallery
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          High-precision haircuts pulled directly from our Catrines Facebook and Booksy client profiles. Featuring sharp skin fades, crisp edge-ups, and styled hair finishes.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Section 5 • Real Portfolio Work"
+        title="Stylist Portfolio Gallery"
+        breadcrumbLabel="Portfolio Gallery"
+        description="High-precision haircuts and beard trims pulled directly from our Catrines Facebook and Booksy client profiles. Featuring sharp skin fades, crisp edge-ups, and styled hair finishes."
+        stats={[
+          { label: "Portfolio Items", value: "8+ Curated Cuts" },
+          { label: "Fade Blends", value: "Drop, Skin, Shadow" },
+          { label: "Beard Lines", value: "Straight Razor Sharp" },
+          { label: "Shop Atmosphere", value: "Vintage Hydraulic Chairs" }
+        ]}
+      />
 
       {/* Category Filter Pills */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,15 +159,13 @@ export default function Gallery({ onOpenBooking }) {
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
-            <a
-              href={salonInfo.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/book"
               className="px-5 py-2.5 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:bg-gold-400 transition-all shadow-md"
             >
-              <span>Booksy Portfolio</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Book Appointment</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -229,16 +233,14 @@ export default function Gallery({ onOpenBooking }) {
                   Item {activeLightboxIndex + 1} of {filteredItems.length}
                 </span>
 
-                <button
-                  onClick={() => {
-                    closeLightbox();
-                    onOpenBooking();
-                  }}
+                <Link
+                  to="/book"
+                  onClick={closeLightbox}
                   className="px-6 py-2.5 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:bg-gold-400 transition-colors shadow-md"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book This Style With Us</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

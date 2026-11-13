@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { reviewsData as initialReviews } from '../data/reviewsData';
 import ReviewCard from '../components/ReviewCard';
+import PageHero from '../components/PageHero';
 import { salonInfo } from '../data/salonInfo';
 import { 
   Star, 
@@ -11,7 +13,8 @@ import {
   Send,
   CheckCircle2,
   ThumbsUp,
-  User
+  User,
+  Calendar
 } from 'lucide-react';
 
 export default function Reviews({ onOpenBooking }) {
@@ -25,6 +28,10 @@ export default function Reviews({ onOpenBooking }) {
     quote: ''
   });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    document.title = "What Durham Men Are Saying | Reviews • Catrines Mens Salon";
+  }, []);
 
   const handleSubmitReview = (e) => {
     e.preventDefault();
@@ -59,20 +66,20 @@ export default function Reviews({ onOpenBooking }) {
   };
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Real Community Feedback</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-4">
-          What Durham Men Are Saying
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Unvarnished, verified reviews from regular Durham clients and newcomers who trust Catrines Mens Salon with their weekly grooming.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Section 6 • Community Voices"
+        title="What Durham Men Are Saying"
+        breadcrumbLabel="Customer Reviews"
+        description="Unvarnished, verified reviews from regular Durham clients and newcomers who trust Catrines Mens Salon with their weekly grooming. Read why we are rated 4.9 out of 5 stars."
+        stats={[
+          { label: "Overall Rating", value: "4.9 / 5.0 ★" },
+          { label: "Verified Reviews", value: "180+ Reviews" },
+          { label: "5-Star Ratio", value: "96% Positive" },
+          { label: "Platforms", value: "Booksy & Google" }
+        ]}
+      />
 
       {/* Ratings Dashboard & Write Review Action */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,7 +94,7 @@ export default function Reviews({ onOpenBooking }) {
                     <Star key={i} className="w-4 h-4 fill-gold-400" />
                   ))}
                 </div>
-                <div className="text-xs text-slate-400 mt-0.5">Based on 180+ Reviews</div>
+                <div className="text-xs text-slate-400 mt-0.5">Based on 180+ Verified Reviews</div>
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -266,10 +273,10 @@ export default function Reviews({ onOpenBooking }) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 rounded-3xl bg-charcoal-900 border border-charcoal-800 text-center space-y-4">
           <h3 className="text-xl font-serif font-bold text-white">
-            Check Out More Reviews on Booksy &amp; Google
+            Ready to Experience Catrines for Yourself?
           </h3>
           <p className="text-xs text-slate-400 max-w-lg mx-auto">
-            We are proud of our high customer satisfaction rate. See live verified appointment reviews or book directly with your favorite barber.
+            Book online to secure your preferred barber and chair time at 2110 Angier Ave.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
@@ -279,16 +286,17 @@ export default function Reviews({ onOpenBooking }) {
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-xl bg-charcoal-850 border border-charcoal-700 hover:border-gold-500/50 text-gold-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all hover:text-white"
             >
-              <span>View 100+ Booksy Reviews</span>
+              <span>View Booksy Profile</span>
               <ExternalLink className="w-4 h-4" />
             </a>
 
-            <button
-              onClick={onOpenBooking}
-              className="px-6 py-3 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider hover:bg-gold-400 transition-colors shadow-md"
+            <Link
+              to="/book"
+              className="px-6 py-3 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider hover:bg-gold-400 transition-colors shadow-md flex items-center gap-2"
             >
-              <span>Book Your First Cut</span>
-            </button>
+              <Calendar className="w-4 h-4" />
+              <span>Book Appointment Online</span>
+            </Link>
           </div>
         </div>
       </section>

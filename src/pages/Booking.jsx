@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import { servicesData } from '../data/servicesData';
 import { barbersData } from '../data/barbersData';
 import { salonInfo } from '../data/salonInfo';
+import PageHero from '../components/PageHero';
 import HoursStatusBadge from '../components/HoursStatusBadge';
 import { 
   Calendar, 
@@ -32,6 +33,10 @@ export default function Booking() {
   });
   const [step, setStep] = useState(1);
   const [bookingMode, setBookingMode] = useState('direct'); // 'direct' or 'booksy'
+
+  useEffect(() => {
+    document.title = "Book Appointment Online | Catrines Mens Salon Durham";
+  }, []);
 
   useEffect(() => {
     const today = new Date();
@@ -68,20 +73,20 @@ export default function Booking() {
   };
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold uppercase tracking-wider text-gold-400 mb-4">
-          <Calendar className="w-3.5 h-3.5" />
-          <span>Priority Chair Reservation</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-white tracking-tight mb-4">
-          Book Your Appointment
-        </h1>
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Select your desired grooming service, pick your preferred master barber, and choose an available time slot with guaranteed zero waiting time.
-        </p>
-      </section>
+    <div className="space-y-16 pb-16">
+      {/* Subpage Header Banner with Breadcrumbs */}
+      <PageHero
+        badge="Zero Wait Appointments"
+        title="Reserve Your Grooming Session"
+        breadcrumbLabel="Appointment Booking"
+        description="Select your desired grooming service, pick your preferred master barber, and choose an available time slot. Prefer using Booksy? Switch to our verified Booksy gateway with one click."
+        stats={[
+          { label: "Online Booking", value: "Instant Confirmation" },
+          { label: "Booksy Gateway", value: "Fully Verified" },
+          { label: "Reminders", value: "Free SMS Notifications" },
+          { label: "Wait Policy", value: "Zero Wait Guarantee" }
+        ]}
+      />
 
       {/* Main Reservation Card */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

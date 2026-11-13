@@ -42,7 +42,8 @@ export default function Navbar({ onOpenBooking }) {
     { name: 'Services & Pricing', path: '/services' },
     { name: 'Portfolio Gallery', path: '/gallery' },
     { name: 'Reviews', path: '/reviews' },
-    { name: 'Contact & Location', path: '/contact' }
+    { name: 'Contact & Location', path: '/contact' },
+    { name: 'Book Appointment', path: '/book' }
   ];
 
   return (
@@ -99,11 +100,12 @@ export default function Navbar({ onOpenBooking }) {
           <Logo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
                 to={link.path}
+                end={link.path === '/'}
                 className={({ isActive }) =>
                   `text-sm font-medium tracking-wide transition-all relative py-1 ${
                     isActive
@@ -134,8 +136,8 @@ export default function Navbar({ onOpenBooking }) {
               <Phone className="w-4 h-4" />
             </a>
 
-            <button
-              onClick={onOpenBooking}
+            <Link
+              to="/book"
               className="relative group overflow-hidden px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-charcoal-950 font-bold text-sm tracking-wider uppercase shadow-[0_0_20px_rgba(212,175,55,0.25)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-[1.02]"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -143,18 +145,18 @@ export default function Navbar({ onOpenBooking }) {
                 <span>Book Appointment</span>
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
-            <button
-              onClick={onOpenBooking}
+            <Link
+              to="/book"
               className="sm:hidden px-3 py-1.5 text-xs font-bold uppercase rounded-md bg-gold-500 text-charcoal-950 flex items-center gap-1 shadow-md"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book</span>
-            </button>
+            </Link>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -185,10 +187,11 @@ export default function Navbar({ onOpenBooking }) {
                   <NavLink
                     key={link.name}
                     to={link.path}
+                    end={link.path === '/'}
                     className={({ isActive }) =>
                       `flex items-center justify-between py-3 px-2 text-base font-medium transition-colors ${
                         isActive
-                          ? 'text-gold-400 font-semibold'
+                          ? 'text-gold-400 font-semibold bg-gold-500/10 rounded-lg px-3'
                           : 'text-slate-200 hover:text-gold-300'
                       }`
                     }
@@ -201,16 +204,14 @@ export default function Navbar({ onOpenBooking }) {
 
               {/* Quick Actions in Mobile Drawer */}
               <div className="pt-4 space-y-3">
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    onOpenBooking();
-                  }}
+                <Link
+                  to="/book"
+                  onClick={() => setIsOpen(false)}
                   className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-charcoal-950 font-bold text-center text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book Appointment Now</span>
-                </button>
+                </Link>
 
                 <div className="grid grid-cols-2 gap-2 pt-1">
                   <a
