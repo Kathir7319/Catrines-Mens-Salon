@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Metallic Gold Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BF953F" />
+      <stop offset="25%" stop-color="#FCF6BA" />
+      <stop offset="50%" stop-color="#B38728" />
+      <stop offset="75%" stop-color="#FBF5B7" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5AB" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#996515" />
+    </linearGradient>
+
+    <!-- Dark Charcoal Background Gradient -->
+    <radialGradient id="darkBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A1F29" />
+      <stop offset="70%" stop-color="#101318" />
+      <stop offset="100%" stop-color="#080A0D" />
+    </radialGradient>
+
+    <!-- Metallic Silver Sheen -->
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#CBD5E1" />
+      <stop offset="100%" stop-color="#64748B" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Shield Container -->
+  <rect width="500" height="500" rx="40" fill="url(#darkBg)" />
+  
+  <!-- Outer Gold Hexagonal / Octagonal Border -->
+  <polygon points="250,25 435,95 435,405 250,475 65,405 65,95" 
+           fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-dasharray="12 4" opacity="0.6"/>
+  <polygon points="250,35 425,103 425,397 250,465 75,397 75,103" 
+           fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+
+  <!-- Inner Concentric Ring -->
+  <circle cx="250" cy="225" r="145" fill="#0C0E12" stroke="url(#goldGrad)" stroke-width="2" />
+  <circle cx="250" cy="225" r="138" fill="none" stroke="url(#goldGrad)" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.8" />
+
+  <!-- 3 Stars at the Top -->
+  <g fill="url(#goldGrad)" transform="translate(250, 108)">
+    <!-- Center Star -->
+    <path d="M0,-10 L2.5,-3 L9.5,-3 L4,1.5 L6,8 L0,4 L-6,8 L-4,1.5 L-9.5,-3 L-2.5,-3 Z" />
+    <!-- Left Star -->
+    <path d="M-28,-8 L-26,-2 L-20,-2 L-24.5,1.5 L-23,7 L-28,3.5 L-33,7 L-31.5,1.5 L-36,-2 L-30,-2 Z" transform="scale(0.8) translate(-10, 0)" />
+    <!-- Right Star -->
+    <path d="M28,-8 L30,-2 L36,-2 L31.5,1.5 L33,7 L28,3.5 L23,7 L24.5,1.5 L20,-2 L26,-2 Z" transform="scale(0.8) translate(10, 0)" />
+  </g>
+
+  <!-- Crossed Barber Shears & Straight Razor Silhouette -->
+  <!-- Left to Right Shear Blade -->
+  <path d="M165,285 L235,215 L240,220 L170,290 Z" fill="url(#silverGrad)" opacity="0.7" />
+  <circle cx="158" cy="298" r="12" fill="none" stroke="url(#silverGrad)" stroke-width="2.5" opacity="0.7" />
+  <path d="M235,215 L320,140 L315,138 L230,210 Z" fill="url(#silverGrad)" opacity="0.7" />
+
+  <!-- Right to Left Straight Razor Blade -->
+  <path d="M335,285 L265,215 L260,220 L330,290 Z" fill="url(#goldAccent)" opacity="0.8" />
+  <path d="M265,215 L180,145 L175,152 L260,220 Z" fill="url(#goldAccent)" opacity="0.8" />
+  <circle cx="342" cy="298" r="10" fill="none" stroke="url(#goldAccent)" stroke-width="2.5" opacity="0.8" />
+
+  <!-- Center Monogram 'C' in Luxury Roman Serif -->
+  <text x="250" y="258" 
+        font-family="'Cinzel', 'Playfair Display', 'Times New Roman', serif" 
+        font-size="118" 
+        font-weight="700" 
+        text-anchor="middle" 
+        fill="url(#goldGrad)" 
+        filter="url(#glow)"
+        letter-spacing="2">C</text>
+
+  <!-- Ribbon / Banner Behind Text -->
+  <path d="M100,345 L400,345 L385,380 L115,380 Z" fill="#14181F" stroke="url(#goldGrad)" stroke-width="1.5" />
+  
+  <!-- Est Durham Ribbon Text -->
+  <text x="250" y="367" 
+        font-family="'Inter', 'Plus Jakarta Sans', sans-serif" 
+        font-size="11" 
+        font-weight="700" 
+        text-anchor="middle" 
+        fill="url(#goldGrad)" 
+        letter-spacing="5">EST. DURHAM, NC</text>
+
+  <!-- Brand Name: CATRINES -->
+  <text x="250" y="420" 
+        font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" 
+        font-size="34" 
+        font-weight="900" 
+        text-anchor="middle" 
+        fill="#FFFFFF" 
+        letter-spacing="7">CATRINES</text>
+
+  <!-- Divider Dots / Lines -->
+  <line x1="90" y1="438" x2="185" y2="438" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <circle cx="250" cy="438" r="3" fill="url(#goldGrad)" />
+  <line x1="315" y1="438" x2="410" y2="438" stroke="url(#goldGrad)" stroke-width="1.5" />
+
+  <!-- Subtitle: MENS SALON -->
+  <text x="250" y="454" 
+        font-family="'Inter', 'Plus Jakarta Sans', sans-serif" 
+        font-size="13" 
+        font-weight="600" 
+        text-anchor="middle" 
+        fill="url(#goldGrad)" 
+        letter-spacing="8">MENS SALON</text>
+</svg>
